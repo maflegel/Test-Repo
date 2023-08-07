@@ -4,9 +4,12 @@ public class ClickGame
     private int currentPointValue;
     private int endScore;
 
+    private boolean isOver;
+
     public ClickGame(int score, int pointValue, int end)
     {
         this.score = score;
+        isOver = false;
         setCurrentPointValue(pointValue);
         setEndScore(end);
     }
@@ -33,6 +36,11 @@ public class ClickGame
         return endScore;
     }
 
+    public boolean isOver()
+    {
+        return isOver;
+    }
+
     public void setEndScore(int endScore)
     {
         if (endScore < 5)
@@ -42,7 +50,10 @@ public class ClickGame
 
     public void increaseScore()
     {
-        score += currentPointValue;
+        if (score < endScore)
+            score += currentPointValue;
+        else
+            isOver = true;
     }
 
     @Override
